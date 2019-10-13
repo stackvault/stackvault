@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
+});
+
+Route::resource('/pagespeed', 'PageSpeedController');
+Route::post('/pagespeed/validate', 'PageSpeedController@validateUrl');
+Route::get('/pagespeed/faq', function () {
+    return view('pagespeed.faq');
 });
