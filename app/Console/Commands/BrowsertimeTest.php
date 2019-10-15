@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Browsertime;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BrowsertimeTest extends Command
 {
@@ -38,7 +40,14 @@ class BrowsertimeTest extends Command
      */
     public function handle()
     {
+        $resultDir = 'browsertime/' . Str::random(18) . base64_encode(microtime() . $this->argument('url'));
+        Storage::disk('local')->makeDirectory($resultDir);
+        $resultDir = Storage::disk('local')->path($resultDir);
+
         $browsertime = new Browsertime($this->argument('url'));
+        $browsertime->setResultDir($resultDir);
         $browsertime->run();
+
+        return $resultDir;
     }
 }

@@ -14,10 +14,7 @@ class Browsertime
         'timeouts.pageLoad' => 10000,
         'screenshot' => 'true',
         'screenshotParams.type' => 'png',
-        'video' => 'true',
-        'visualMetrics' => 'true',
-        'videoParams.createFilmstrip' => 'true',
-        'viewPort' => '1920x1080',
+        'viewPort' => '1280x800',
         'headless' => 'true',
         'useSameDir' => 'true',
         'browser' => 'chrome',
@@ -35,6 +32,14 @@ class Browsertime
 --chrome.chromedriverPath=/home/ahindle/mycloud/stackvault.io/stackvault/vendor/bin/chromedriver-amd64
 --resultDir=/tmp/browsertime_results_with_screenshots_video_and_json/
 */
+
+    /**
+    * string $dir - full path to result directory
+    */
+    public function setResultDir(string $dir)
+    {
+        $this->arguments['resultDir'] = $dir;
+    }
 
     public function buildCommand(): string
     {
@@ -56,16 +61,16 @@ class Browsertime
 
     public function run()
     {
-        echo $this->buildCommand();
-        return;
-        $process = new Process("echo wutwut");
+        $command = $this->buildCommand();
+        $process = new Process(explode(' ', $command));
         $process->run();
-        // executes after the command finishes
+
+        // Executes after the command finishes
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
 
-        echo $process->getOutput();
+        echo $process->getOutput() . PHP_EOL;
     }
 
     public function setIterations(int $iterations)
