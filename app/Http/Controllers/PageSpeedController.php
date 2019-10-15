@@ -12,6 +12,13 @@ class PageSpeedController extends Controller
         return view('pagespeed/index');
     }
 
+    public function store()
+    {
+        //ToDo: Logic!!
+        return new JsonResponse(['success' => true]);
+    }
+
+
     public function validateUrl(Request $request)
     {
         // ToDo: Spam protection
