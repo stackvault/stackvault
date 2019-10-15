@@ -880,16 +880,6 @@
     util.promisify "^1.0.0"
     write-file-atomic "^2.3.0"
 
-"@expo/ngrok-bin-darwin-ia32@2.2.8":
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/@expo/ngrok-bin-darwin-ia32/-/ngrok-bin-darwin-ia32-2.2.8.tgz#46ed6d485a87396acf4af317beeaab7a1f607315"
-  integrity sha512-Mgept4WvXobcNQbxV0f8Nqrukl4HsAM4ExfFOC5BJ1PinlZisb1lQYp+PGu/3DuOYAinAspbL/3m77JkhT5Oow==
-
-"@expo/ngrok-bin-darwin-x64@2.2.8":
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/@expo/ngrok-bin-darwin-x64/-/ngrok-bin-darwin-x64-2.2.8.tgz#bf32ece32c3a1c6dcbe518ee88e6c2af3ad8764a"
-  integrity sha512-hEVxBAKTT9G+jCy+2NOjgFrPrrzmdxljLhz3cQIb4izjooQXGCbTFvnEntB0odgsf6Dpa2jWNNt18H6t2nneOQ==
-
 "@expo/ngrok-bin-freebsd-ia32@2.2.8":
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/@expo/ngrok-bin-freebsd-ia32/-/ngrok-bin-freebsd-ia32-2.2.8.tgz#7b198757f6bb6602a4c2bc5384b4ddb4d272eca5"
@@ -940,8 +930,6 @@
   resolved "https://registry.yarnpkg.com/@expo/ngrok-bin/-/ngrok-bin-2.2.8-beta.3.tgz#22b5fadf0a0de91adbcc62a9a3c86402fe74e672"
   integrity sha512-VzL67ybSvSYhFJxwBm19VMEHAcgg6bDhE9p8HKDOXL2tdHIzqYtqAYxOyhv2mS263WYqdomtoAChSOb449of+g==
   optionalDependencies:
-    "@expo/ngrok-bin-darwin-ia32" "2.2.8"
-    "@expo/ngrok-bin-darwin-x64" "2.2.8"
     "@expo/ngrok-bin-freebsd-ia32" "2.2.8"
     "@expo/ngrok-bin-freebsd-x64" "2.2.8"
     "@expo/ngrok-bin-linux-arm" "2.2.8"
@@ -995,11 +983,6 @@
   integrity sha512-LB7jWkqrHo+5fJHNrLAFdimuSXQ2MQ4lA7SQW5bf/HbsXuV2VrT/jN/M8f/KoWt0uJMGN4k/j7Opx4AvOOxSew==
   dependencies:
     cross-spawn "^6.0.5"
-
-"@expo/traveling-fastlane-darwin@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@expo/traveling-fastlane-darwin/-/traveling-fastlane-darwin-1.10.0.tgz#d7d250fdcc485263d29c9a4e524370fc2c9be5e9"
-  integrity sha512-Ry9gHhDIPjSnP5lvtUcR7LoE5vU2Ngn893B22PYEk1RuwJG5m7ezKSGyXjs3W1WVUvPW/2+ikF1YjrNyPAIrqQ==
 
 "@expo/traveling-fastlane-linux@1.10.0":
   version "1.10.0"
@@ -4359,7 +4342,6 @@ expo-cli@^3.3.0:
     validator "10.5.0"
     wordwrap "1.0.0"
   optionalDependencies:
-    "@expo/traveling-fastlane-darwin" "1.10.0"
     "@expo/traveling-fastlane-linux" "1.10.0"
 
 express@4.16.4:
