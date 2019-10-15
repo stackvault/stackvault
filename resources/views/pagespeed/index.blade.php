@@ -4,12 +4,12 @@
 @endsection
 @section('content')
     <div class="bg-blue-800 text-gray-200 p-5">
-        <div class="w-full mb-4">
+        <div class="w-full mb-4 text-center">
             <span class="font-display">pagespeed</span> automatically sends you vital updates on your sites performance, direct to your e-mail.
         </div>
         <pagespeed-form></pagespeed-form>
     </div>
-    <div class="p-5 text-sm">
+    <div class="p-5 text-sm rounded">
         <h3 class="text-lg">
             Why should I use <span class="font-display">pagespeed</span>?
         </h3>
