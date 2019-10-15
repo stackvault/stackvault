@@ -8,8 +8,8 @@
 * `vagrant ssh`
 * `cd /home/vagrant/code/stackvault`
 * `php artisan key:generate`
-* `npm install`
-* `npm run dev`
+* `yarn install`
+* `yarn run dev`
 
 # Artisan
 
