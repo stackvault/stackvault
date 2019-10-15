@@ -1,11 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Browsertime;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
-class Browsertime
+class Runner
 {
     private $url;
     private $browsertimePath;
@@ -19,26 +21,31 @@ class Browsertime
         'useSameDir' => 'true',
         'browser' => 'chrome',
         'connectivity.profile' => 'cable',
+        'skipHar' => 'true',
+        'silent' => true,
+        'q' => true, // Silent again, so it's doubly silent
     ];
 
     public function __construct(string $url)
     {
         $this->url = $url;
-        $this->browsertimePath = realpath(__DIR__ . '/../') . '/node_modules/.bin/browsertime';
+        $this->browsertimePath = realpath(__DIR__ . '/../../') . '/node_modules/.bin/browsertime';
+        $resultDir = 'browsertime/' . Str::random(18) . base64_encode(microtime() . $this->url);
+        Storage::disk('local')->makeDirectory($resultDir);
+        $this->setResultDir(Storage::disk('local')->path($resultDir));
     }
 
-/*
---chrome.binaryPath=/usr/local/bin/chromium
---chrome.chromedriverPath=/home/ahindle/mycloud/stackvault.io/stackvault/vendor/bin/chromedriver-amd64
---resultDir=/tmp/browsertime_results_with_screenshots_video_and_json/
-*/
-
     /**
-    * string $dir - full path to result directory
-    */
+     * @param string $dir
+     */
     public function setResultDir(string $dir)
     {
         $this->arguments['resultDir'] = $dir;
+    }
+
+    public function getResultDir(): string
+    {
+        return $this->arguments['resultDir'];
     }
 
     public function buildCommand(): string
@@ -59,7 +66,11 @@ class Browsertime
         return $args;
     }
 
-    public function run()
+    /**
+     * @param string $screenshotName - including extension (.png) - this will overwrite any file with the same name, please generate a sensible unique name
+     * @return Result
+     */
+    public function run(string $screenshotName)
     {
         $command = $this->buildCommand();
         $process = new Process(explode(' ', $command));
@@ -70,7 +81,9 @@ class Browsertime
             throw new ProcessFailedException($process);
         }
 
-        echo $process->getOutput() . PHP_EOL;
+        $result = new Result($this->getResultDir(), $screenshotName);
+
+        return $result;
     }
 
     public function setIterations(int $iterations)
