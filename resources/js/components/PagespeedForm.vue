@@ -31,8 +31,8 @@
 
         </div>
         <div v-show="state==4">
-            <div class="flex justify-center">
-                <div class="text-center text-green-400 font-display px-3">Awesome! Now all you need to do is confirm your e-mail</div>
+            <div class="flex flex-no-wrap justify-center">
+                <div class="text-center text-green-400 font-display">Awesome! Now all you need to do is confirm your e-mail</div>
             </div>
             <div class="flex justify-center mt-4">
                 <button v-on:click.prevent="reset" class="ml-1 bg-blue-500 px-3 py-1 font-display text-gray-200 rounded hover:bg-blue-400">Add another?</button>

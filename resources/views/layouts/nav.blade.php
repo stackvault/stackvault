@@ -1,5 +1,9 @@
 <nav class="absolute md:relative top-0 shadow w-full text-gray-200 flex bg-gray-800 justify-between py-1 px-3">
-    <header class="text-2xl font-display font-bold">stackvault @yield('product')</header>
+    <header class="text-2xl font-display font-bold"><span class="hidden sm:inline-block">stackvault </span>
+        @if(View::hasSection('subtitle'))
+            <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i> @yield('subtitle')</span>
+        @endif
+    </header>
     <div class="block md:hidden"><i class="cursor-pointer mt-1 text-2xl fas fa-bars"></i></div>
     <ul class="hidden md:flex flex-inline mt-2 text-base">
         <li class="mr-2 cursor-pointer hover:text-white hover:font-bold">
