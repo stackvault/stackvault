@@ -13,6 +13,7 @@ sites:
     -
       map: dev.stackvault.io
       to: /home/vagrant/code/stackvault/public/
+      schedule: true
 databases:
     - stackvault
 features:
