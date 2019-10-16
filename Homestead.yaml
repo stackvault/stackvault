@@ -21,5 +21,6 @@ features:
     - mysql8: true
     - ohmyzsh: false
     - webdriver: true
+    - redis: true
 name: stackvault
 hostname: dev.stackvault.io
