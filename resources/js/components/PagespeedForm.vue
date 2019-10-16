@@ -76,6 +76,7 @@
                 }
             },
             validate: function () {
+            // TODO: Complain if no protocol - we can't determine http:// or https:/ for them
                 this.urlValidating = true;
                 axios.post('/pagespeed/validate/', {
                     url: this.url

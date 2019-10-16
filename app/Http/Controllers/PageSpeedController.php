@@ -25,6 +25,7 @@ class PageSpeedController extends Controller
         if (!$request->has('url')) {
             abort(400);
         }
+
         $url = $request->get('url');
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
