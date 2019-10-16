@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('product')
-    <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i>pagespeed</span>
+    <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i><a href="/pagespeed" class="text-white">pagespeed</a></span>
 @endsection
 @section('content')
     <div class="bg-blue-800 text-gray-200 p-5">
