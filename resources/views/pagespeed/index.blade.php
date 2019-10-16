@@ -1,12 +1,15 @@
 @extends('layouts.app')
 @section('subtitle', 'pagespeed')
-@section('content')
-    <div class="bg-blue-800 text-gray-200 p-5">
-        <div class="w-full mb-4 text-center">
-            <span class="font-display">pagespeed</span> automatically sends you vital updates on your sites performance, direct to your e-mail.
-        </div>
+@section('top-panel')
+    <div class="text-gray-200 p-5 shadow">
+        <!--div class="w-full mb-4 text-center">
+            <span class="block font-display text-2xl">pagespeed</span>
+            <span class="block font-base">Get the vital updates you need on your webpage, directly to your inbox each morning, without any bills or hassle.</span>
+        </div-->
         <pagespeed-form></pagespeed-form>
     </div>
+@endsection
+@section('content')
     <div class="p-5 text-sm rounded">
         <h3 class="text-lg">
             Why should I use <span class="font-display">pagespeed</span>?

@@ -1,9 +1,9 @@
 <template>
     <form method="post">
         <div v-show="state==1" class="flex flex-wrap flex-inline justify-center">
-            <div class="block w-full text-center font-display mb-2">Enter a URL to get started</div>
-            <div class="flex w-full justify-center">
-                <input v-model="url" class="h-10 md:flex-none rounded px-3 py-1 text-gray-800 flex-1" type="text" name="url" placeholder="https://mysite.com"/>
+            <div class="block w-full text-center font-display mb-2">What URL would you like us to check?</div>
+            <div class="flex w-full md:w-3/4 lg:w-1/2 justify-center">
+                <input v-model="url" class="h-10 rounded px-3 py-1 text-gray-800 flex-1" type="text" name="url" placeholder="https://mysite.com"/>
                 <div class="flex-shrink-0">
                     <input type="submit" value="Check" v-on:click.prevent="submit" v-show="!urlValidating" class="h-10 ml-1 bg-blue-500 px-3 py-1 font-display text-gray-200 rounded hover:bg-blue-400"/>
                     <img class="h-12 w-12" v-show="urlValidating" src="/images/loader.gif" alt="Processing"/>
@@ -28,7 +28,13 @@
             </div>
         </div>
         <div v-show="state==3">
-
+            <div class=" w-full justify-center">
+                <div class="font-display text-center w-full">Did you forget to tick the box about updates?</div>
+                <div class="flex justify-center mt-4">
+                    <button v-on:click.prevent="updates=true; next()" class="ml-1 bg-blue-500 px-3 py-1 font-display text-gray-200 rounded hover:bg-blue-400">Oh I missed that, I do want updates!</button>
+                    <button v-on:click.prevent="updates=false; next()" class="ml-1 bg-red-500 px-3 py-1 font-display text-gray-200 rounded hover:bg-red-400">No, stop bothering me</button>
+                </div>
+            </div>
         </div>
         <div v-show="state==4">
             <div class="flex flex-no-wrap justify-center">
@@ -55,6 +61,9 @@
             }
         },
         methods: {
+            next: function() {
+                this.state++;
+            },
             back: function() {
                 this.state--;
             },
@@ -82,7 +91,7 @@
                 }).then(response => {
                     if(response.data.http_code === 200) {
                         this.urlValidated = true;
-                        this.state++;
+                        this.next();
                     } else {
                         // Notify about error
                     }
@@ -98,11 +107,13 @@
                 }).then(response => {
                     this.saving = false;
                     if(response.status === 200) {
-                        this.state++;
                         if (this.updates === true) {
                             // If they already chose to receive updates, skip the 2nd optin
+                            // ToDo: Don't call next as we don't want this state in history (when we add that?)
                             this.state++;
                         }
+                        this.next();
+
                         this.saved = true;
                     } else {
                         //ToDo: error
