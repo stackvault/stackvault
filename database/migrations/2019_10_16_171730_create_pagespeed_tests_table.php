@@ -10,8 +10,9 @@ class CreatePagespeedTestsTable extends Migration
     {
         Schema::create('pagespeed_tests', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid');
             $table->bigInteger('page_id', false, true);
-            $table->bigInteger('email_id', false, true);
+            $table->bigInteger('email_id', false, true)->nullable();
             $table->integer('timing_domain_lookup', false, true); // Milliseconds
             $table->integer('timing_server_connect', false, true); // Milliseconds
             $table->integer('timing_server_response', false, true); // Milliseconds
