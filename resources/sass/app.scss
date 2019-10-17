@@ -16,7 +16,7 @@
   --uiToggleDisabledColor: var(--toggleDisabledColor, #868e96);
   --uiToggleBgColor: var(--toggleBgColor, #fff);
   --uiToggleArrowWidth: var(--toggleArrowWidth, 2px);
-  --uiToggleArrowColor: var(--toggleArrowColor, #fff);
+  --uiToggleArrowColor: var(--toggleArrowColor, #4299e1);
 
   display: inline-block;
   position: relative;
@@ -173,7 +173,7 @@ LEVEL 3. SETTINGS
 */
 
 .toggle{
-  --toggleColor: #2d3748;
+  --toggleColor: #faf3ff;
   --toggleBgColor: #4299e1;
   --toggleSize: 25px;
 }

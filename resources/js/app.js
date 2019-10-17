@@ -29,4 +29,17 @@ Vue.component('pagespeed-form', require('./components/PagespeedForm.vue').defaul
 
 const app = new Vue({
     el: '#app',
+    data: function() {
+       return {
+           mobileNavOpen: false
+       }
+    },
+    methods: {
+        openMobileNav: function() {
+            this.mobileNavOpen = true
+        },
+        closeMobileNav: function() {
+            this.mobileNavOpen = false
+        }
+    }
 });

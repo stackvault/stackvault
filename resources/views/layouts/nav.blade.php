@@ -5,20 +5,35 @@
                 <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i> @yield('subtitle')</span>
             @endif
         </header>
-        <div class="block md:hidden"><i class="cursor-pointer mt-1 text-2xl fas fa-bars"></i></div>
+
+        <div class="block md:hidden"><i v-on:click="openMobileNav()" class="cursor-pointer mt-1 text-2xl fas fa-bars"></i></div>
+
         <ul class="hidden md:flex flex-inline mt-2 text-base">
+            @foreach($navLinks as $link)
             <li class="mr-2 cursor-pointer hover:text-white hover:font-bold">
-                <a href="/">
-                    Home
+                <a href="{{ $link['url'] }}">
+                    {{ $link['name'] }}
                 </a>
             </li>
-            <li class="mr-2 cursor-pointer hover:text-white hover:font-bold">
-                <a href="{{ route('pagespeed.index') }}">
-                    Pagespeed
-                </a>
-            </li>
-            <li class="cursor-pointer hover:text-white hover:font-bold">Something Else</li>
+            @endforeach
         </ul>
     </nav>
     @yield('top-panel')
+</div>
+
+<div class="absolute right-0 top-0 w-full h-screen flex" v-show="mobileNavOpen">
+    <div v-on:click="closeMobileNav()" class="w-1/2 bg-gray-800 opacity-50">
+
+    </div>
+    <div class="flex-1 bg-blue-400 font-display text-xl shadow p-5" style="opacity: 0.95">
+        <ul class="text-center">g
+        @foreach($navLinks as $link)
+            <li class="mb-4 cursor-pointer">
+                <a href="{{ $link['url'] }}">
+                    {{ $link['name'] }}
+                </a>
+            </li>
+        @endforeach
+        </ul>
+    </div>
 </div>

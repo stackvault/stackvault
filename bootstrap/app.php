@@ -11,7 +11,9 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application(
+use App\Stackvault;
+
+$app = new Stackvault(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
