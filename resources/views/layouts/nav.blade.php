@@ -1,8 +1,8 @@
 <div class="bg-repeat pt-10 md:pt-0 shadow-lg rounded-b" style="background-image: url('/images/dark-honeycomb.png');">
     <nav class="absolute md:relative top-0 w-full text-gray-200 flex justify-between py-1 px-3 opacity-75">
-        <header class="text-2xl font-display font-bold"><span class="hidden sm:inline-block"><a href="/" class="text-white">stackvault</a></span>
+        <header class="text-2xl font-display font-bold"><span class="sm:inline-block"><a href="/" class="text-white">stackvault</a></span>
             @if(View::hasSection('subtitle'))
-                <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i> @yield('subtitle')</span>
+                <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i><div class="inline -mt-10">@yield('subtitle')</div></span>
             @endif
         </header>
 
