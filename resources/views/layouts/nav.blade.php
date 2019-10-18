@@ -1,8 +1,8 @@
-<div class="bg-repeat pt-10 md:pt-0 shadow-lg" style="background-image: url('/images/dark-honeycomb.png');">
+<div class="bg-repeat pt-10 md:pt-0 shadow-lg rounded-b" style="background-image: url('/images/dark-honeycomb.png');">
     <nav class="absolute md:relative top-0 w-full text-gray-200 flex justify-between py-1 px-3 opacity-75">
-        <header class="text-2xl font-display font-bold"><span class="hidden sm:inline-block"><a href="/" class="text-white">stackvault</a></span>
+        <header class="text-2xl font-display font-bold"><span class="sm:inline-block"><a href="/" class="text-white">stackvault</a></span>
             @if(View::hasSection('subtitle'))
-                <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i> @yield('subtitle')</span>
+                <span class="font-normal"><i class="fas fa-caret-right mr-2 ml-2"></i><div class="inline -mt-10">@yield('subtitle')</div></span>
             @endif
         </header>
 
@@ -25,15 +25,16 @@
     <div v-on:click="closeMobileNav()" class="w-1/2 bg-gray-800 opacity-50">
 
     </div>
-    <div class="flex-1 bg-blue-400 font-display text-xl shadow p-5" style="opacity: 0.95">
-        <ul class="text-center">g
+    <div class="flex-1 bg-blue-400 font-display text-xl shadow" style="opacity: 0.95">
+        <ul class="text-center">
         @foreach($navLinks as $link)
-            <li class="mb-4 cursor-pointer">
-                <a href="{{ $link['url'] }}">
+            <a href="{{ $link['url'] }}">
+                <li class="p-5 cursor-pointer hover:text-gray-200 hover:bg-blue-600 hover:opacity-100">
                     {{ $link['name'] }}
-                </a>
-            </li>
-        @endforeach
+                </li>
+            </a>
+
+            @endforeach
         </ul>
     </div>
 </div>

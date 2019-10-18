@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,18 @@ class PageSpeedController extends Controller
         return view('pagespeed/index');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        //ToDo: Logic!!
-        return new JsonResponse(['success' => true]);
+        $this->validate($request, [
+            'url' => "required",
+            'email' => "required"
+        ]);
+        $page = new Page();
+        $page->email = $request->get('email');
+        $page->url = $request->get('url');
+        $page->newsletter_opted_in = (bool) $request->get('updates');
+        $page->saveOrFail();
+        return new JsonResponse(['success' => true, 'id' => $page->id]);
     }
 
 
