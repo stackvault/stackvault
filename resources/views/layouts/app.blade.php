@@ -10,7 +10,10 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    @stack('styles')
     <script type="text/javascript" src="{{ mix('/js/app.js') }}" defer></script>
+    @stack('scripts')
+    @include('layouts.analytics')
 </head>
 <body>
     <div id="app" class="font-body text-gray-800">
