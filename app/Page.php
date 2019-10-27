@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     protected $table = 'pagespeed_pages';
-    public $timestamps = false;
+    const CREATED_AT = 'date_added';
+    const UPDATED_AT = null;
+    const DELETED_AT = 'date_deleted';
+
+    public $timestamps = true;
     protected $dates = [
         'date_added',
         'date_email_confirmed',
