@@ -21,7 +21,11 @@ class SendEmailVerification
     public function __construct(Page $page)
     {
         $this->page = $page;
-        Mail::to($page->email)
-            ->sendNow(new PagespeedEmailVerification($page));
+    }
+
+    public function send()
+    {
+        return Mail::to($this->page->email)
+                ->sendNow(new PagespeedEmailVerification($this->page));
     }
 }

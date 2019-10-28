@@ -26,6 +26,6 @@ class EmailVerificationListener
      */
     public function handle(SendEmailVerification $event)
     {
-
+        $event->send();
     }
 }
