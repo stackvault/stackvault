@@ -1,9 +1,16 @@
-<html>
-<head>
+@component('mail::message')
+    # Verify your e-mail
 
-</head>
-<body>
-This is an email for you to verify!!
-Your URL was {{ $page->url }}
-</body>
-</html>
+    A detailed analysis of your page is **just seconds away!**
+
+    All you need to do now is validate your e-mail by clicking the link below
+
+    @component('mail::button', ['url' => config('app.url') . '/verify?code=' . $code])
+        Verify
+    @endcomponent
+
+    If you didn't request this, please ignore.
+
+    Thanks,<br>
+    {{ config('app.name') }}
+@endcomponent

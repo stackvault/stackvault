@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailVerificationCode;
 use App\Page;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,18 +11,21 @@ use Illuminate\Queue\SerializesModels;
 
 class PagespeedEmailVerification extends Mailable
 {
-    use Queueable, SerializesModels;
+    protected $page;
+    protected $code;
 
-    public $page;
+    protected $theme = 'default';
     /**
      * Create a new message instance.
      *
      * @param Page $page
+     * @param EmailVerificationCode $verificationCode
      * @return void
      */
-    public function __construct(Page $page)
+    public function __construct(Page $page, EmailVerificationCode $verificationCode)
     {
         $this->page = $page;
+        $this->code = $verificationCode->code;
     }
 
     /**
@@ -31,15 +35,9 @@ class PagespeedEmailVerification extends Mailable
      */
     public function build()
     {
-        app('log')->info('Building e-mail');
-        app('log')->info('Queue: ' . print_r(config('queue'), true));
-        app('log')->info('Queues: ' . print_r(config('queues'), true));
-        app('log')->info('Connection: ' . print_r(config('connection'), true));
-        app('log')->info('Connections: ' . print_r(config('connections'), true));
-
         return $this
             ->from(['address' => 'no-reply@stackvault.io', 'name' => config('app.name')])
             ->subject('Verify your e-mail')
-            ->view('mail.pagespeed.verification');
+            ->view('mail.pagespeed.verification', ['page' => $this->page, 'code' => $this->code]);
     }
 }

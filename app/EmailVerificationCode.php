@@ -14,6 +14,10 @@ class EmailVerificationCode extends Model
     const UPDATED_AT = null;
     const DELETED_AT = 'date_deleted';
 
+    public $fillable = [
+        'code'
+    ];
+
     public function page()
     {
         return $this->belongsTo(Page::class);

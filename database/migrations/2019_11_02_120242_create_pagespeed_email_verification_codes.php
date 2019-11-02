@@ -13,7 +13,7 @@ class CreatePagespeedEmailVerificationCodes extends Migration
      */
     public function up()
     {
-        Schema::table('pagespeed_email_verification_codes', function (Blueprint $table) {
+        Schema::create('pagespeed_email_verification_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('page_id', false, true);
             $table->string('code', 200);

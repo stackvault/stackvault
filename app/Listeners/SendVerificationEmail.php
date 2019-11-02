@@ -19,13 +19,11 @@ class SendVerificationEmail implements ShouldQueue
      */
     public function handle(PageCreated $event)
     {
-        tap(new EmailVerificationCode(
-           [
-               'page_id' => $event->page,
-               'code' => $code = EmailVerificationCode::createCode()
-           ]
-        ))->save();
+        $event->page->verificationCodes()->save($code = new EmailVerificationCode(['code' => EmailVerificationCode::createCode()]));
         return Mail::to($event->page->email)
-            ->sendNow(new PagespeedEmailVerification($event->page, $code));
+            ->sendNow(new PagespeedEmailVerification(
+                $event->page,
+                $code
+            ));
     }
 }
