@@ -31,6 +31,12 @@ class PagespeedEmailVerification extends Mailable
      */
     public function build()
     {
+        app('log')->info('Building e-mail');
+        app('log')->info('Queue: ' . print_r(config('queue'), true));
+        app('log')->info('Queues: ' . print_r(config('queues'), true));
+        app('log')->info('Connection: ' . print_r(config('connection'), true));
+        app('log')->info('Connections: ' . print_r(config('connections'), true));
+
         return $this
             ->from(['address' => 'no-reply@stackvault.io', 'name' => config('app.name')])
             ->subject('Verify your e-mail')

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\PageObserver;
+use App\Page;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Page::observe(PageObserver::class);
         view()->composer('layouts.nav', function ($view) {
             $view->with('navLinks', app()->getNavLinks());
         });

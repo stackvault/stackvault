@@ -2,9 +2,12 @@
 
 namespace App;
 
-use App\Events\SendEmailVerification;
+use App\Events\PageCreated;
+use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Queue\InteractsWithQueue;
 
 class Page extends Model
 {
@@ -21,10 +24,6 @@ class Page extends Model
         'date_email_confirmed',
         'date_unsubscribed',
         'date_deleted',
-    ];
-
-    protected $dispatchesEvents = [
-        'saved' => SendEmailVerification::class,
     ];
 
     public function tests()
@@ -48,6 +47,11 @@ class Page extends Model
     public function isSubscribed()
     {
         return ($this->date_email_confirmed && !$this->date_unsubscribed && !$this->date_deleted);
+    }
+
+    public function verificationCodes()
+    {
+        return $this->hasMany(EmailVerificationCode::class);
     }
 
 }

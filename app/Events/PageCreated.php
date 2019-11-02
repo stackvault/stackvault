@@ -7,7 +7,7 @@ use App\Page;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmailVerification
+class PageCreated
 {
     use SerializesModels;
 
@@ -21,11 +21,5 @@ class SendEmailVerification
     public function __construct(Page $page)
     {
         $this->page = $page;
-    }
-
-    public function send()
-    {
-        return Mail::to($this->page->email)
-                ->sendNow(new PagespeedEmailVerification($this->page));
     }
 }
