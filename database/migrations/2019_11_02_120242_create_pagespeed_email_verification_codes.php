@@ -16,10 +16,11 @@ class CreatePagespeedEmailVerificationCodes extends Migration
         Schema::create('pagespeed_email_verification_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('page_id', false, true);
-            $table->string('code', 200);
+            $table->string('code', 200)->unique()->index('pagespeed_email_verification_codes_code');
             $table->dateTime('date_added')->nullable(false);
             $table->dateTime('date_email_confirmed')->nullable()->default(null);
             $table->dateTime('date_deleted')->nullable()->default(null);
+            $table->foreign('page_id')->references('id')->on('pagespeed_pages');
         });
     }
 

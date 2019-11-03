@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\EmailVerificationCode;
 use App\Page;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -42,5 +44,23 @@ class PageSpeedController extends Controller
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_exec($ch);
         return new JsonResponse(curl_getinfo($ch));
+    }
+
+    public function verifyEmail(Request $request)
+    {
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
+        $code = $request->get('code');
+        $evc = EmailVerificationCode::where('code', $code)->first();
+        if ($evc instanceof EmailVerificationCode) {
+            $evc->date_email_confirmed = Carbon::now();
+            $page = tap($evc->page()->get())->date_email_confirmed = Carbon::now();
+            $page->save();
+            $evc->save();
+            echo "SUCCESS!";
+        } else {
+            abort(402);
+        }
     }
 }
