@@ -20,3 +20,5 @@ Route::post('/pagespeed/validate', 'PageSpeedController@validateUrl');
 Route::get('/pagespeed/faq', function () {
     return view('pagespeed.faq');
 })->name('pagespeed.faq');
+
+Route::get('/verify-email', 'EmailVerificationCodeController@verifyEmail')->name('pagespeed.verifyEmail');
