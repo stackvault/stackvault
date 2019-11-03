@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\EmailVerificationCode;
 use App\Page;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
