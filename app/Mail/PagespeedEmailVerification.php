@@ -38,6 +38,6 @@ class PagespeedEmailVerification extends Mailable
         return $this
             ->from(['address' => 'no-reply@stackvault.io', 'name' => config('app.name')])
             ->subject('Verify your e-mail')
-            ->view('mail.pagespeed.verification', ['page' => $this->page, 'code' => $this->code]);
+            ->markdown('mail.pagespeed.verification', ['page' => $this->page, 'code' => $this->code]);
     }
 }

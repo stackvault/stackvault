@@ -1,16 +1,16 @@
 @component('mail::message')
-    # Verify your e-mail
+#Verify your e-mail
 
-    A detailed analysis of your page is **just seconds away!**
+A detailed analysis of your page is *just seconds away!*
 
-    All you need to do now is validate your e-mail by clicking the link below
+All you need to do now is validate your e-mail by clicking the link below
 
-    @component('mail::button', ['url' => config('app.url') . '/verify?code=' . $code])
-        Verify
-    @endcomponent
+@component('mail::button', ['url' => config('app.url') . '/verify?code=' . $code])
+Verify
+@endcomponent
 
-    If you didn't request this, please ignore.
+If you didn't request this, please ignore.
 
-    Thanks,<br>
-    {{ config('app.name') }}
+Thanks,
+{{ config('app.name') }}
 @endcomponent
