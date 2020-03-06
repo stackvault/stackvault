@@ -15,13 +15,13 @@
     @stack('scripts')
     @include('layouts.analytics')
 </head>
-<body>
-    <div id="app" class="font-body text-gray-800">
+<body class="bg-gray-100">
+    <div id="app" class="mx-auto max-w-6xl font-body text-gray-200">
         @include('layouts.nav')
-        <div class="text-base mt-10 md:m-0">
+        <div class="text-base">
             @yield('content')
         </div>
-        <footer class="w-full absolute bottom-0 text-gray-200 bg-gray-800 py-1 px-3 text-xs flex justify-center bg-repeat" style="background-image: url('/images/dark-honeycomb.png');">
+        <footer class="w-full text-gray-200 bg-indigo-900 p-3 text-xs flex justify-center">
             This site is owned and operated by <span class="font-display font-bold mx-1">stackvault</span> and we don't care what you think
         </footer>
     </div>
