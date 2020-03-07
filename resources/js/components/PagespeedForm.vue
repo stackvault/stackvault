@@ -4,23 +4,23 @@
         <span v-if="errors.message">{{ errors.message[0] }}</span>
         <label for="email" class="flex justify-end">
             <span class="my-auto">URL</span>
-                <input class="w-3/4 ml-3 py-2 px-5 shadow-inner md:rounded text-gray-800" v-model="url" type="text" name="url" placeholder="https://google.com/page">
+                <input class="w-3/4 ml-3 py-2 px-5 shadow-inner rounded text-gray-800" v-model="url" type="text" name="url" placeholder="https://google.com/page">
         </label>
         <span class="text-xs text-red-400 text-right mt-3" v-for="error in errors.url">{{ error }}</span>
         <label for="email" class="flex justify-end mt-3">
             <span class="my-auto">E-mail</span>
-            <input class="w-3/4 ml-3 py-2 px-5 md:rounded shadow-inner text-gray-800" v-model="email" type="text" name="email" placeholder="technical@company.com">
+            <input class="w-3/4 ml-3 py-2 px-5 rounded shadow-inner text-gray-800" v-model="email" type="text" name="email" placeholder="technical@company.com">
         </label>
         <span class="text-xs text-red-400 text-right mt-3" v-for="error in errors.email">{{ error }}</span>
 
         <label for="subscribe" class="flex justify-end my-auto mt-3">
-            <div class="w-3/4 ml-3 text-xs flex justify-end">
+            <div class="w-full md:w-3/4 ml-3 text-xs flex justify-end">
                 <span class="pr-4 my-auto">I would like to be notified about other similar upcoming products</span>
-                <input class="h-6 w-6 bg-white md:rounded-lg cursor-pointer" type="checkbox" name="updates" v-model="updates">
+                <input class="h-6 w-6 bg-white rounded-lg cursor-pointer" type="checkbox" name="updates" v-model="updates">
             </div>
         </label>
-        <input v-if="!saving" class="font-display border border-indigo-600 inner-shadow md:w-1/3 mr-0 ml-auto bg-indigo-200 hover:bg-indigo-300 cursor-pointer text-indigo-900 md:rounded py-3 px-5 mt-3" type="submit" v-on:click.prevent="save" value="Analyse">
-        <button v-if="saving" disabled class="font-display border border-indigo-600 inner-shadow md:w-1/3 mr-0 ml-auto bg-indigo-300 cursor-pointer text-indigo-900 md:rounded py-3 px-5 mt-3" type="submit" v-on:click.prevent="save">
+        <input v-if="!saving" class="font-display border border-indigo-600 inner-shadow w-full md:w-1/3 mr-0 ml-auto bg-indigo-200 hover:bg-indigo-300 cursor-pointer text-indigo-900 rounded py-3 px-5 mt-3" type="submit" v-on:click.prevent="save" value="Analyse">
+        <button v-if="saving" disabled class="font-display border border-indigo-600 inner-shadow w-full md:w-1/3 mr-0 ml-auto bg-indigo-300 cursor-pointer text-indigo-900 rounded py-3 px-5 mt-3" type="submit" v-on:click.prevent="save">
             <img src="/images/loader.gif" class="mx-auto">
         </button>
     </form>

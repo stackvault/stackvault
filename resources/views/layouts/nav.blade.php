@@ -1,6 +1,7 @@
 <div class="p-5 bg-indigo-900 rounded-b-sm inner-shadow shadow">
-    <nav class="md:max-w-6xl mx-auto flex justify-between">
-        <header class="text-2xl font-display font-bold">
+    <nav class="md:max-w-6xl mx-auto tracking-wider">
+        <div class="flex justify-between">
+        <header class="text-3xl font-display font-bold">
             @if(View::hasSection('subtitle'))
                 <span>@yield('subtitle')</span>
             @else
@@ -10,31 +11,25 @@
 
         @yield('center-nav')
 
-        <div class="block md:hidden"><i v-on:click="openMobileNav()" class="cursor-pointer mt-1 text-2xl fas fa-bars"></i></div>
+        <div class="block md:hidden"><i v-on:click="toggleMobileNav()" class="cursor-pointer mt-1 text-2xl fas fa-bars"></i></div>
 
-        <ul class="hidden md:flex flex-inline my-auto text-base">
+        <div class="hidden md:flex flex-row w-full flex-no-wrap justify-end text-lg">
             @foreach($navLinks as $link)
-            <li class="mr-2 cursor-pointer hover:text-white hover:font-bold">
-                <a href="{{ $link['url'] }}">
+                <a class="@if(url()->current() == $link['url']) font-bold text-white @else text-gray-300 @endif mx-4 my-2 hover:font-bold hover:text-white" href="{{ $link['url'] }}">
                     {{ $link['name'] }}
                 </a>
-            </li>
-            @endforeach
+        @endforeach
+
+        </div>
         </ul>
+        </div>
         <div v-show="mobileNavOpen">
-            <div v-on:click="closeMobileNav()" class="w-1/2 bg-gray-800 opacity-50">
-
-            </div>
-            <div class="flex-1 bg-blue-400 font-display text-xl shadow" style="opacity: 0.95">
-                <ul class="text-center">
-                    @foreach($navLinks as $link)
-                        <a href="{{ $link['url'] }}">
-                            <li class="p-5 cursor-pointer hover:text-gray-200 hover:bg-blue-600 hover:opacity-100">
-                                {{ $link['name'] }}
-                            </li>
-                        </a>
-
-                    @endforeach
+            <div class="flex flex-row w-full flex-no-wrap justify-center text-xl">
+                @foreach($navLinks as $link)
+                    <a class="@if(url()->current() == $link['url']) font-bold text-white @else text-gray-300 @endif mx-4 my-2 hover:font-bold hover:text-white" href="{{ $link['url'] }}">
+                    {{ $link['name'] }}
+                    </a>
+                @endforeach
                 </ul>
             </div>
         </div>

@@ -16,7 +16,7 @@
     @include('layouts.analytics')
 </head>
 <body class="bg-gray-600">
-    <div id="app" class="mx-auto h-screen max-w-6xl font-body text-gray-200">
+    <div id="app" class="md:mx-auto md:max-w-6xl font-body text-gray-200">
         @include('layouts.nav')
         <div class="text-base">
             @yield('content')

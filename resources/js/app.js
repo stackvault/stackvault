@@ -35,11 +35,8 @@ const app = new Vue({
        }
     },
     methods: {
-        openMobileNav: function() {
-            this.mobileNavOpen = true
-        },
-        closeMobileNav: function() {
-            this.mobileNavOpen = false
+        toggleMobileNav: function() {
+            this.mobileNavOpen = !this.mobileNavOpen;
         }
     }
 });
