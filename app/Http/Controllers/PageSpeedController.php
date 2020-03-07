@@ -17,16 +17,20 @@ class PageSpeedController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'url' => "required",
-            'email' => "required"
-        ]);
-        $page = new Page();
-        $page->email = $request->get('email');
-        $page->url = $request->get('url');
-        $page->newsletter_opted_in = (bool) $request->get('updates');
-        $page->saveOrFail();
-        return new JsonResponse(['success' => true, 'id' => $page->id]);
+        try {
+            $this->validate($request, [
+                'url' => "starts_with:http://,https://|active_url|required",
+                'email' => "email|required"
+            ]);
+            $page = new Page();
+            $page->email = $request->get('email');
+            $page->url = $request->get('url');
+            $page->newsletter_opted_in = (bool) $request->get('updates');
+            $page->saveOrFail();
+            return new JsonResponse(['success' => true, 'id' => $page->id]);
+        } catch (Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 422);
+        }
     }
 
 

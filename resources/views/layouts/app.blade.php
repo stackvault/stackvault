@@ -15,13 +15,13 @@
     @stack('scripts')
     @include('layouts.analytics')
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-600">
     <div id="app" class="mx-auto h-screen max-w-6xl font-body text-gray-200">
         @include('layouts.nav')
         <div class="text-base">
             @yield('content')
         </div>
-        <footer class="text-gray-200 bg-indigo-900 p-3 text-xs flex justify-center">
+        <footer class="text-gray-200 bg-indigo-900 rounded-br-sm rounded-bl-sm p-3 text-xs flex justify-center">
             This site is owned and operated by <span class="font-display font-bold mx-1">stackvault</span> and we don't care what you think
         </footer>
     </div>

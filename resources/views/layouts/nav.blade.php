@@ -1,4 +1,4 @@
-<div class="p-5 bg-indigo-900">
+<div class="p-5 bg-indigo-900 rounded-b-sm inner-shadow shadow">
     <nav class="md:max-w-6xl mx-auto flex justify-between">
         <header class="text-2xl font-display font-bold">
             @if(View::hasSection('subtitle'))

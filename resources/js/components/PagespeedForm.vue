@@ -1,72 +1,56 @@
 <template>
-    <form method="post">
-        <div v-show="state==1" class="flex flex-wrap flex-inline justify-center">
-            <div class="block w-full text-center mb-2">What URL would you like us to check?</div>
-            <div class="flex w-full md:w-3/4 lg:w-1/3 justify-center">
-                <input v-model="url" class="h-10 rounded px-3 py-1 text-gray-800 flex-1" type="text" name="url" placeholder="https://mysite.com"/>
-                <div class="flex-shrink-0">
-                    <input type="submit" value="Check" v-on:click.prevent="submit" v-show="!urlValidating" class="h-10 ml-1 bg-indigo-900 px-3 py-1 text-gray-200 rounded hover:bg-indigo-800"/>
-                    <img class="h-12 w-12" v-show="urlValidating" src="/images/loader.gif" alt="Processing"/>
-                </div>
+    <div>
+    <form class="flex flex-col align-right" v-if="!saved">
+        <span v-if="errors.message">{{ errors.message[0] }}</span>
+        <label for="email" class="flex justify-end">
+            <span class="my-auto">URL</span>
+                <input class="w-3/4 ml-3 py-2 px-5 shadow-inner md:rounded text-gray-800" v-model="url" type="text" name="url" placeholder="https://google.com/page">
+        </label>
+        <span class="text-xs text-red-400 text-right mt-3" v-for="error in errors.url">{{ error }}</span>
+        <label for="email" class="flex justify-end mt-3">
+            <span class="my-auto">E-mail</span>
+            <input class="w-3/4 ml-3 py-2 px-5 md:rounded shadow-inner text-gray-800" v-model="email" type="text" name="email" placeholder="technical@company.com">
+        </label>
+        <span class="text-xs text-red-400 text-right mt-3" v-for="error in errors.email">{{ error }}</span>
+
+        <label for="subscribe" class="flex justify-end my-auto mt-3">
+            <div class="w-3/4 ml-3 text-xs flex justify-end">
+                <span class="pr-4 my-auto">I would like to be notified about other similar upcoming products</span>
+                <input class="h-6 w-6 bg-white md:rounded-lg cursor-pointer" type="checkbox" name="updates" v-model="updates">
             </div>
-        </div>
-        <div v-show="state==2" class="flex flex-wrap flex-inline justify-center">
-            <div class="block w-full text-center text-green-400 mb-2"><span class="font-bold mr-2">Great news!</span> We can connect to <span class="font-bold">{{ url }}</span> fine!</div>
-            <div class="block w-full text-center mb-2">Now we just need the e-mail you'd like to receive your stats</div>
-            <div class="flex w-full md:w-3/4 lg:w-1/3 justify-center">
-                <input v-model="email" class="h-10  rounded px-3 py-1 text-gray-800 flex-1" type="email" name="email" placeholder="email@address.com"/>
-                <div class="flex-shrink-0">
-                    <input v-show="!saving" type="submit" value="Send" v-on:click.prevent="submit" class="h-10 ml-1 bg-indigo-900 px-3 py-1 text-gray-200 rounded hover:bg-indigo-900"/>
-                    <img  v-show="saving" class="h-12 w-12" src="/images/loader.gif" alt="Processing"/>
-                </div>
-            </div>
-            <div class="flex w-full justify-center mt-2">
-                <label for="updates" class="mt-2 text-sm toggle">
-                    <input v-model="updates" type="checkbox" id="updates" name="updates">
-                    <span class="ml-2"><span>I'd love to be updated about this and future products</span></span>
-                </label>
-            </div>
-        </div>
-        <div v-show="state==3">
-            <div class=" w-full justify-center">
-                <div class="text-center w-full">Did you forget to tick the box about updates?</div>
-                <div class="flex justify-center mt-4">
-                    <button v-on:click.prevent="updates=true; next()" class="ml-1 bg-indigo-900 px-3 py-1 text-gray-200 rounded hover:bg-indigo-800">Oh I missed that, I do want updates!</button>
-                    <button v-on:click.prevent="updates=false; next()" class="ml-1 bg-red-500 px-3 py-1 text-gray-200 rounded hover:bg-red-400">No, stop bothering me</button>
-                </div>
-            </div>
-        </div>
-        <div v-show="state==4">
-            <div class="flex flex-no-wrap justify-center">
-                <div class="text-center text-green-400 font-display">Awesome! Now all you need to do is confirm your e-mail</div>
-            </div>
-            <div class="flex justify-center mt-4">
-                <button v-on:click.prevent="reset" class="ml-1 bg-blue-500 px-3 py-1 text-gray-200 rounded hover:bg-blue-400">Add another?</button>
-            </div>
-        </div>
+        </label>
+        <input v-if="!saving" class="font-display border border-indigo-600 inner-shadow md:w-1/3 mr-0 ml-auto bg-indigo-200 hover:bg-indigo-300 cursor-pointer text-indigo-900 md:rounded py-3 px-5 mt-3" type="submit" v-on:click.prevent="save" value="Analyse">
+        <button v-if="saving" disabled class="font-display border border-indigo-600 inner-shadow md:w-1/3 mr-0 ml-auto bg-indigo-300 cursor-pointer text-indigo-900 md:rounded py-3 px-5 mt-3" type="submit" v-on:click.prevent="save">
+            <img src="/images/loader.gif" class="mx-auto">
+        </button>
     </form>
+
+    <div v-if="saved" class="flex justify-between">
+        <span class="text-center">
+        <i class="far fa-thumbs-up text-3xl my-auto"></i>
+        <strong>Thanks!</strong>
+        </span>
+        <span class="ml-5">We've sent you a confirmation e-mail, once that's been confirmed, you'll start getting your daily updates straight away</span>
+    </div>
+    </div>
 </template>
 <script>
     export default {
         data: function() {
             return {
                 url: null,
-                urlValidated: false,
-                urlValidating: false,
                 saved: false,
                 saving: false,
                 email: null,
                 updates: false,
-                state: 1
+                errors: {
+                    message: null,
+                    url: null,
+                    email: null
+                }
             }
         },
         methods: {
-            next: function() {
-                this.state++;
-            },
-            back: function() {
-                this.state--;
-            },
             reset: function() {
                 this.url = null;
                 this.urlValidated = false;
@@ -76,28 +60,11 @@
                 this.email = null;
                 this.updates = false;
                 this.state = 1;
-            },
-            submit: function () {
-                if (this.urlValidated) {
-                    this.save();
-                } else {
-                    this.validate();
-                }
-            },
-            validate: function () {
-            // TODO: Complain if no protocol - we can't determine http:// or https:/ for them
-                this.urlValidating = true;
-                axios.post('/pagespeed/validate/', {
-                    url: this.url
-                }).then(response => {
-                    if(response.data.http_code === 200) {
-                        this.urlValidated = true;
-                        this.next();
-                    } else {
-                        // Notify about error
-                    }
-                    this.urlValidating = false;
-                });
+                this.errors = {
+                    message: null,
+                    url: null,
+                    email: null
+                };
             },
             save: function () {
                 this.saving = true;
@@ -107,17 +74,13 @@
                     updates: this.updates
                 }).then(response => {
                     this.saving = false;
-                    if(response.status === 200) {
-                        if (this.updates === true) {
-                            // If they already chose to receive updates, skip the 2nd optin
-                            // ToDo: Don't call next as we don't want this state in history (when we add that?)
-                            this.state++;
-                        }
-                        this.next();
-
-                        this.saved = true;
+                    this.saved = true;
+                }, err => {
+                    this.saving = false;
+                    if (err.response.data.errors) {
+                        this.errors = err.response.data.errors;
                     } else {
-                        //ToDo: error
+                        this.errors.message = [err.response.data.message];
                     }
                 })
             }
