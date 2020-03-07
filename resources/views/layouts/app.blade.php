@@ -21,7 +21,7 @@
         <div class="text-base">
             @yield('content')
         </div>
-        <footer class="w-full text-gray-200 bg-indigo-900 p-3 text-xs flex justify-center">
+        <footer class="text-gray-200 bg-indigo-900 p-3 text-xs flex justify-center">
             This site is owned and operated by <span class="font-display font-bold mx-1">stackvault</span> and we don't care what you think
         </footer>
     </div>
